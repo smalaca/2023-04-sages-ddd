@@ -16,19 +16,6 @@ public class Cart {
 
     @Factory
     public Offer acceptProducts(Map<UUID, Amount> products) {
-        /**
-         * Koszyk
-         * 3 kubki
-         * 2 zeszyty
-         * ->
-         * Oferta
-         * 1 kubek
-         * 1 zeszyt
-         * Koszyk
-         * 3 kubki
-         * 2 zeszyty
-         */
-
         Offer.Builder builder = new Offer.Builder();
         products.forEach((productId, amount) -> {
             if (hasEnoughOf(productId, amount)) {
