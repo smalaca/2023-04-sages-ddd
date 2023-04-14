@@ -8,4 +8,12 @@ class CartException extends RuntimeException {
     static RuntimeException notExistingFor(UUID productId, Amount amount) {
         return null;
     }
+    static RuntimeException productsListIsEmpty() {
+        return null;
+    }
+    static RuntimeException amountLessThenOne(Amount amount) {
+        return null;
+    }
+
+
 }

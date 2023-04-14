@@ -11,4 +11,5 @@ public class Amount {
     public boolean isNotLessThan(Amount amount) {
         return this.value >= amount.value;
     }
+
 }

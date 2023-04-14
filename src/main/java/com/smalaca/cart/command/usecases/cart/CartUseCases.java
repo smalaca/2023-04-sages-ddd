@@ -36,4 +36,16 @@ public class CartUseCases {
         // zapisanie rezultatu 1(0) ... *
         return offerRepository.save(offer);
     }
+
+    public void addProducts(UUID cartId, Map<UUID, Integer> products){
+
+        Cart cart = cartRepository.findBy(cartId);
+
+        Map<UUID, Amount> productsVO = new HashMap<>();
+        products.forEach((productId, value) -> productsVO.put(productId, new Amount(value)));
+
+        cart.addProducts(productsVO);
+
+        cartRepository.save(cart);
+    }
 }
