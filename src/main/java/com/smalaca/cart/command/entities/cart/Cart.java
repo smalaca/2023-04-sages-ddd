@@ -28,10 +28,18 @@ public class Cart {
         return builder.build();
     }
 
+    public void addProducts(Map<UUID, Amount> products){
+
+        products.forEach((productId, amount) -> cartItems.add(new CartItem(productId, amount)));
+
+    }
+
     private boolean hasEnoughOf(UUID productId, Amount amount) {
         return cartItems.stream()
                 .anyMatch(cartItem -> {
                     return cartItem.isFor(productId) && cartItem.hasNotLessThan(amount);
                 });
     }
+
+
 }
