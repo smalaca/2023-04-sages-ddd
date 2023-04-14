@@ -1,11 +1,9 @@
 package com.smalaca.cart.command.entities.cart;
 
 import com.smalaca.cart.command.entities.offer.Offer;
-import com.smalaca.cart.command.entities.offer.OfferItem;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Cart {
     private final List<CartItem> cartItems = new ArrayList<>();
@@ -23,10 +21,12 @@ public class Cart {
          * 3 kubki
          * 2 zeszyty
          */
-        List<OfferItem> offerItems = cartItems.stream()
-                .map(CartItem::asOfferItem)
-                .collect(Collectors.toList());
 
-        return new Offer(offerItems);
+        Offer.Builder builder = new Offer.Builder();
+        cartItems.forEach(cartItem -> {
+            builder.withItem(cartItem.getProductId(), cartItem.getAmount());
+        });
+
+        return builder.build();
     }
 }
