@@ -30,7 +30,20 @@ public class Cart {
 
     public void addProducts(Map<UUID, Amount> products){
 
+    if (products.isEmpty())
+    {
+        throw CartException.productsListIsEmpty();
+    }
+
+        products.forEach((productId, amount) -> {
+                    if (isValidEntry(productId, amount)) {
+
+                    } else {
+                        throw CartException.amountLessThenOne( amount);
+                    }
+                });
         products.forEach((productId, amount) -> cartItems.add(new CartItem(productId, amount)));
+
 
     }
 
@@ -41,5 +54,8 @@ public class Cart {
                 });
     }
 
+    private boolean isValidEntry(UUID productId, Amount amount) {
+            return amount.isNotLessThan (new Amount(1));
+        }
 
 }
