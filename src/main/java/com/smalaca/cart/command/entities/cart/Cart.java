@@ -33,6 +33,8 @@ public class Cart {
         products.forEach((productId, amount) -> {
             if (hasEnoughOf(productId, amount)) {
                 builder.withItem(productId, amount);
+            } else {
+                throw CartException.notExistingFor(productId, amount);
             }
         });
 
