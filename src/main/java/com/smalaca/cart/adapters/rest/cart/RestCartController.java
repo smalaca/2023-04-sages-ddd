@@ -2,6 +2,7 @@ package com.smalaca.cart.adapters.rest.cart;
 
 import com.smalaca.cart.command.usecases.cart.CartUseCases;
 
+import java.util.Map;
 import java.util.UUID;
 
 public class RestCartController {
@@ -11,7 +12,7 @@ public class RestCartController {
         this.cartUseCases = cartUseCases;
     }
 
-    public UUID acceptProducts(UUID cartId) {
-        return cartUseCases.acceptProducts(cartId);
+    public UUID acceptProducts(UUID cartId, Map<UUID, Integer> products) {
+        return cartUseCases.acceptProducts(cartId, products);
     }
 }

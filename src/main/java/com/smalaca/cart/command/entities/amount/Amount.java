@@ -7,4 +7,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class Amount {
     private final int value;
+
+    public boolean isNotLessThan(Amount amount) {
+        return this.value >= amount.value;
+    }
 }
