@@ -1,11 +1,14 @@
 package com.smalaca.cart.command.entities.offer;
 
 import com.smalaca.cart.command.entities.amount.Amount;
+import com.smalaca.ddd.annotations.AggregateRoot;
+import com.smalaca.ddd.annotations.Factory;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+@AggregateRoot
 public class Offer {
     private final List<OfferItem> offerItems;
 
@@ -13,6 +16,7 @@ public class Offer {
         this.offerItems = offerItems;
     }
 
+    @Factory
     public static class Builder {
         private final List<OfferItem> offerItems = new ArrayList<>();
 

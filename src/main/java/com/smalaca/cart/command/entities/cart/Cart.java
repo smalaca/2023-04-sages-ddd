@@ -1,13 +1,17 @@
 package com.smalaca.cart.command.entities.cart;
 
 import com.smalaca.cart.command.entities.offer.Offer;
+import com.smalaca.ddd.annotations.AggregateRoot;
+import com.smalaca.ddd.annotations.Factory;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@AggregateRoot
 public class Cart {
     private final List<CartItem> cartItems = new ArrayList<>();
 
+    @Factory
     public Offer acceptProducts() {
         /**
          * Koszyk
