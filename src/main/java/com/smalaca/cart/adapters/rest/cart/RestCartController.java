@@ -11,7 +11,7 @@ public class RestCartController {
         this.cartUseCases = cartUseCases;
     }
 
-    public UUID acceptProducts() {
-        return cartUseCases.acceptProducts();
+    public UUID acceptProducts(UUID cartId) {
+        return cartUseCases.acceptProducts(cartId);
     }
 }
