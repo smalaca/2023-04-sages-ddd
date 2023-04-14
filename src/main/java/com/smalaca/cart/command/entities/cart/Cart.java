@@ -1,9 +1,7 @@
 package com.smalaca.cart.command.entities.cart;
 
-import com.smalaca.cart.command.entities.amount.Amount;
-import com.smalaca.cart.command.entities.offer.Offer;
+import com.smalaca.cart.command.entities.event.EventRegistry;
 import com.smalaca.ddd.annotations.AggregateRoot;
-import com.smalaca.ddd.annotations.Factory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,22 +11,19 @@ import java.util.UUID;
 @AggregateRoot
 public class Cart {
     private final List<CartItem> cartItems = new ArrayList<>();
+    private EventRegistry eventRegistry;
 
-    @Factory
-    public Offer acceptProducts(Map<UUID, Amount> products) {
-        Offer.Builder builder = new Offer.Builder();
+    public void acceptProducts(Map<UUID, Amount> products) {
         products.forEach((productId, amount) -> {
-            if (hasEnoughOf(productId, amount)) {
-                builder.withItem(productId, amount);
-            } else {
+            if (hasNotEnoughOf(productId, amount)) {
                 throw CartException.notExistingFor(productId, amount);
             }
         });
 
-        return builder.build();
+        eventRegistry.publish(ProductsAccepted.of(products));
     }
 
-    private boolean hasEnoughOf(UUID productId, Amount amount) {
+    private boolean hasNotEnoughOf(UUID productId, Amount amount) {
         return cartItems.stream()
                 .anyMatch(cartItem -> {
                     return cartItem.isFor(productId) && cartItem.hasNotLessThan(amount);

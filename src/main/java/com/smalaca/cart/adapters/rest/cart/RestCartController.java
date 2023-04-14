@@ -12,7 +12,7 @@ public class RestCartController {
         this.cartUseCases = cartUseCases;
     }
 
-    public UUID acceptProducts(UUID cartId, Map<UUID, Integer> products) {
-        return cartUseCases.acceptProducts(cartId, products);
+    public void acceptProducts(UUID cartId, Map<UUID, Integer> products) {
+        cartUseCases.acceptProducts(cartId, products);
     }
 }
