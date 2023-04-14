@@ -15,10 +15,7 @@ public class OfferUseCase {
 
     public UUID acceptOffer(OfferRequest offerRequest) {
         Offer offer = offerRepository.findBy(offerRequest.offerId);
-        offer.SetShipmentMethod(offerRequest.shipmentMethodId);
-        offer.SetIsInvoice(offerRequest.isInvoice);
-        offer.Accept();
-
+        offer.Accept(offerRequest);
         return offerRepository.save(offer);
     }
 }
